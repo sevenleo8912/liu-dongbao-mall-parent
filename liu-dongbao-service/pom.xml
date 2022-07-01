@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>liu-dongbao-mall-parent</artifactId>
+        <groupId>com.liu</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>liu-dongbao-service</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>liu-dongbao-oms</module>
+        <module>liu-dongbao-pms</module>
+        <module>liu-dongbao-ums</module>
+        <module>liu-dongbao-pay</module>
+        <module>liu-dongbao-cart</module>
+        <module>liu-dongbao-dictionary</module>
+        <module>liu-dongbao-sms</module>
+        <module>liu-dongbao-cms</module>
+        <module>liu-dongbao-application</module>
+    </modules>
+
+
+</project>
