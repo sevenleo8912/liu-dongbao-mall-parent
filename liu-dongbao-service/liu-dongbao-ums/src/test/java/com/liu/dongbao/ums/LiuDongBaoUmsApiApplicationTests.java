@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author xiaok
  * @ClassName LiuDongBaoUmsApiApplicationTests
  * @date 2022/7/2 13:26
- * @description TODO
+ * @description 测试插入操作
  */
 @SpringBootTest
 public class LiuDongBaoUmsApiApplicationTests {
