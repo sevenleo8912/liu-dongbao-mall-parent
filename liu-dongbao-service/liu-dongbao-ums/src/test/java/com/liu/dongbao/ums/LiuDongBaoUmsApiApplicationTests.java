@@ -20,7 +20,7 @@ public class LiuDongBaoUmsApiApplicationTests {
     @Test
     void insertUms() {
         UmsMember umsMember = new UmsMember();
-        umsMember.setUsername("liu");
+        umsMember.setUsername("liujunchang");
         umsMember.setPassword("sss");
         umsMember.setEmail("sdf");
         umsMemberMapper.insert(umsMember);

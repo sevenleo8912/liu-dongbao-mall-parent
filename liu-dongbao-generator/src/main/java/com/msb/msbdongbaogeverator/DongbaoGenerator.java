@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 马士兵教育:chaopengfei
@@ -29,12 +30,16 @@ public class DongbaoGenerator {
 		GlobalConfig gc = new GlobalConfig();
 
 		String separator = File.separator;
-		gc.setOutputDir("F:\\idea_workspace\\liu-dongbao-mall-parent\\liu-dongbao-service\\liu-dongbao-ums\\src\\main\\java");
+		String projectPath = System.getProperty("user.dir");
+		String parentModule = "liu-dongbao-service";
+		String subModule = "liu-dongbao-ums";
+		gc.setOutputDir(projectPath+separator+parentModule+separator+subModule+File.separator + "/src/main/java");//设置代码生成路径
+//		gc.setOutputDir("F:\\idea_workspace\\liu-dongbao-mall-parent\\liu-dongbao-service\\liu-dongbao-ums\\src\\main\\java");
 		gc.setAuthor("刘晓坤");
 		gc.setOpen(false);//打开目录
 		gc.setFileOverride(true);//是否覆盖
 		gc.setServiceName("%sService");//去Service的I前缀。
-		gc.setIdType(IdType.ID_WORKER);
+		gc.setIdType(IdType.AUTO);
 		gc.setDateType(DateType.ONLY_DATE);
 		gc.setSwagger2(false);
 
@@ -70,7 +75,7 @@ public class DongbaoGenerator {
 		// 自动填充
 		TableFill gmtCreate = new TableFill("create_time",FieldFill.INSERT);
 		TableFill gmtModify = new TableFill("update_time",FieldFill.INSERT_UPDATE);
-		ArrayList<TableFill> tableFills = new ArrayList<TableFill>();
+		List<TableFill> tableFills = new ArrayList<>();
 		tableFills.add(gmtCreate);
 		tableFills.add(gmtModify);
 
