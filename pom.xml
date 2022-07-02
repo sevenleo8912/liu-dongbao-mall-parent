@@ -24,6 +24,10 @@
         <module>liu-dongbao-application</module>
         <module>msb-dongbao-job</module>
     </modules>
+
+    <name>liu-dongbao-mall-parent</name>
+    <description>东宝商城</description>
+
     <!--工具类的jar包-->
     <dependencies>
         <dependency>
