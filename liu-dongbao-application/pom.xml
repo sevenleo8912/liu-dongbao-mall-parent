@@ -9,11 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>liu-dongbao-manager-web</artifactId>
+    <artifactId>liu-dongbao-application</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>liu-dongbao-portal-web</module>
-        <module>liu-dongbao-job</module>
+        <module>msb-dongbao-manager-web</module>
+        <module>msb-dongbao-portal-web</module>
     </modules>
 
 

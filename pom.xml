@@ -20,8 +20,9 @@
         <module>liu-dongbao-api</module>
         <module>liu-dongbao-common</module>
         <module>liu-dongbao-service</module>
-        <module>liu-dongbao-manager-web</module>
         <module>liu-dongbao-generator</module>
+        <module>liu-dongbao-application</module>
+        <module>msb-dongbao-job</module>
     </modules>
     <!--工具类的jar包-->
     <dependencies>
