@@ -22,74 +22,84 @@ import java.util.List;
  */
 public class DongbaoGenerator {
 
-	public static void main(String[] args) {
-		// 构建一个代码生成对象
-		AutoGenerator mpg = new AutoGenerator();
+    public static void main(String[] args) {
+        // 构建一个代码生成对象
+        AutoGenerator mpg = new AutoGenerator();
 
-		// 1. 全局配置
-		GlobalConfig gc = new GlobalConfig();
+        // 1.全局配置
+        GlobalConfig gc = new GlobalConfig();
+        // 目录分隔符
+        String separator = File.separator;
+        // 项目路径
+        String projectPath = System.getProperty("user.dir");
+        // 父模块
+        String parentModule = "liu-dongbao-service";
+        // 子模块
+        String subModule = "liu-dongbao-ums";
+        // 设置代码生成路径
+        gc.setOutputDir(projectPath + separator + parentModule + separator + subModule + File.separator + "/src/main/java");
+        gc.setAuthor("刘晓坤");
+        // 打开目录
+        gc.setOpen(false);
+        // 是否覆盖
+        gc.setFileOverride(true);
+        // 去Service的I前缀。
+        gc.setServiceName("%sService");
+        gc.setIdType(IdType.AUTO);
+        gc.setDateType(DateType.ONLY_DATE);
+        gc.setSwagger2(false);
 
-		String separator = File.separator;
-		String projectPath = System.getProperty("user.dir");
-		String parentModule = "liu-dongbao-service";
-		String subModule = "liu-dongbao-ums";
-		gc.setOutputDir(projectPath+separator+parentModule+separator+subModule+File.separator + "/src/main/java");//设置代码生成路径
-//		gc.setOutputDir("F:\\idea_workspace\\liu-dongbao-mall-parent\\liu-dongbao-service\\liu-dongbao-ums\\src\\main\\java");
-		gc.setAuthor("刘晓坤");
-		gc.setOpen(false);//打开目录
-		gc.setFileOverride(true);//是否覆盖
-		gc.setServiceName("%sService");//去Service的I前缀。
-		gc.setIdType(IdType.AUTO);
-		gc.setDateType(DateType.ONLY_DATE);
-		gc.setSwagger2(false);
+        mpg.setGlobalConfig(gc);
 
-		mpg.setGlobalConfig(gc);
+        DataSourceConfig dsc = new DataSourceConfig();
+        dsc.setUrl("jdbc:mysql://192.168.134.130:3306/liu_dongbao?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setUsername("root");
+        dsc.setPassword("root123");
+        dsc.setDbType(DbType.MYSQL);
 
-		DataSourceConfig dsc = new DataSourceConfig();
-		dsc.setUrl("jdbc:mysql://192.168.134.130:3306/liu_dongbao?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai");
-		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-		dsc.setUsername("root");
-		dsc.setPassword("root123");
-		dsc.setDbType(DbType.MYSQL);
+        mpg.setDataSource(dsc);
 
-		mpg.setDataSource(dsc);
+        // 包设置
+        PackageConfig pc = new PackageConfig();
+        pc.setParent("com.liu.dongbao.ums");
+        pc.setEntity("entity");
+        pc.setMapper("mapper");
+        pc.setController("controller");
 
-		// 包设置
-		PackageConfig pc = new PackageConfig();
+        mpg.setPackageInfo(pc);
 
-		pc.setParent("com.liu.dongbao.ums");
-		pc.setEntity("entity");
-		pc.setMapper("mapper");
-		pc.setController("controller");
+        // 策略配置
+        StrategyConfig strategy = new StrategyConfig();
+        //表名
+        strategy.setInclude("ums_member");
+        // 下划线转他驼峰
+        strategy.setNaming(NamingStrategy.underline_to_camel);
+        // 列 下划线转驼峰
+        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+        //lombok开启
+        strategy.setEntityLombokModel(true);
+        strategy.setLogicDeleteFieldName("deleted");
 
-		mpg.setPackageInfo(pc);
+        // 自动填充
+        TableFill gmtCreate = new TableFill("create_time", FieldFill.INSERT);
+        TableFill gmtModify = new TableFill("update_time", FieldFill.INSERT_UPDATE);
+        List<TableFill> tableFills = new ArrayList<>();
+        tableFills.add(gmtCreate);
+        tableFills.add(gmtModify);
 
-		// 策略配置
-		StrategyConfig strategy = new StrategyConfig();
-		strategy.setInclude("ums_member");//表名
-		strategy.setNaming(NamingStrategy.underline_to_camel);// 下划线转他驼峰
-		strategy.setColumnNaming(NamingStrategy.underline_to_camel);// 列 下划线转脱发
-		strategy.setEntityLombokModel(true);//lombok 开启
-		strategy.setLogicDeleteFieldName("deleted");
+        strategy.setTableFillList(tableFills);
 
-		// 自动填充
-		TableFill gmtCreate = new TableFill("create_time",FieldFill.INSERT);
-		TableFill gmtModify = new TableFill("update_time",FieldFill.INSERT_UPDATE);
-		List<TableFill> tableFills = new ArrayList<>();
-		tableFills.add(gmtCreate);
-		tableFills.add(gmtModify);
+        //乐观锁
+        strategy.setVersionFieldName("version");
 
-		strategy.setTableFillList(tableFills);
+        // restcontroller
+        strategy.setRestControllerStyle(true);
+        // localhost:xxx/hello_2
+        strategy.setControllerMappingHyphenStyle(true);
 
-		//乐观锁
-		strategy.setVersionFieldName("version");
+        mpg.setStrategy(strategy);
 
-		// restcontroller
-		strategy.setRestControllerStyle(true);
-		strategy.setControllerMappingHyphenStyle(true);// localhost:xxx/hello_2
-
-		mpg.setStrategy(strategy);
-
-		mpg.execute();
-	}
+        mpg.execute();
+    }
 }
